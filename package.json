@@ -1,0 +1,51 @@
+{
+  "name": "food-delivery-platform",
+  "version": "1.0.0",
+  "description": "Production-ready food delivery platform with customer, delivery partner, restaurant, admin, and team leader applications",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "backend",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "test": "turbo run test",
+    "test:cov": "turbo run test:cov",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "type-check": "turbo run type-check",
+    "backend:dev": "cd backend && npm run start:dev",
+    "backend:prod": "cd backend && npm run start:prod",
+    "admin-web:dev": "cd apps/admin-web && npm run dev",
+    "admin-web:build": "cd apps/admin-web && npm run build",
+    "operations-web:dev": "cd apps/operations-web && npm run dev",
+    "operations-web:build": "cd apps/operations-web && npm run build",
+    "db:migrate": "cd backend && npm run typeorm migration:run",
+    "db:migrate:revert": "cd backend && npm run typeorm migration:revert",
+    "db:seed": "cd backend && npm run seed",
+    "db:reset": "cd backend && npm run typeorm schema:drop && npm run typeorm migration:run && npm run seed",
+    "clean": "turbo clean && rm -rf node_modules",
+    "setup": "npm install && npm run db:migrate && npm run db:seed"
+  },
+  "dependencies": {
+    "turbo": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "packageManager": "npm@9.0.0"
+}
