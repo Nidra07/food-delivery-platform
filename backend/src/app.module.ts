@@ -15,11 +15,12 @@ import { Address } from './database/entities/address.entity';
 import { CartItem } from './database/entities/cart-item.entity';
 import { Order } from './database/entities/order.entity';
 import { OrderItem } from './database/entities/order-item.entity';
+import { OrderStatusHistory } from './database/entities/order-status-history.entity';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({ type: 'postgres', url: process.env.DATABASE_URL, entities: [User, Role, Permission, Restaurant, MenuCategory, MenuItem, Address, CartItem, Order, OrderItem], synchronize: process.env.NODE_ENV !== 'production', ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false }),
+    TypeOrmModule.forRoot({ type: 'postgres', url: process.env.DATABASE_URL, entities: [User, Role, Permission, Restaurant, MenuCategory, MenuItem, Address, CartItem, Order, OrderItem, OrderStatusHistory], synchronize: process.env.NODE_ENV !== 'production', ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false }),
     AuthModule,
     RestaurantsModule,
     OrdersModule,
