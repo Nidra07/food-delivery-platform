@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { HealthController } from './health/health.controller';
+import { Permission } from './database/entities/permission.entity';
 import { Role } from './database/entities/role.entity';
 import { User } from './database/entities/user.entity';
 
@@ -12,7 +13,7 @@ import { User } from './database/entities/user.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      entities: [User, Role],
+      entities: [User, Role, Permission],
       synchronize: process.env.NODE_ENV !== 'production',
       ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
     }),
