@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -37,6 +37,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
     return this.issue(user);
+  }
+
+  async getCurrentUser(id: string) {
+    const user = await this.users.findOne({ where: { id } });
+    if (!user || user.status !== 'ACTIVE') throw new NotFoundException('User not found');
+    return this.safeUser(user);
   }
 
   private async issue(user: User) {
